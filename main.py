@@ -5,6 +5,9 @@
 #   refinement technique in the SIFT method. Computers and electronics 
 #   in agriculture, 99, 77-84.
 # 
+# Example: python3 main.py 23_0001.jpg 23_0002.jpg
+#
+
 
 import numpy as np
 import cv2
@@ -71,6 +74,17 @@ def get_matched_keypoints(filename_1, filename_2, dir='images'):
 
     gray_1 = cv2.cvtColor(img_1, cv2.COLOR_BGR2GRAY)
     gray_2 = cv2.cvtColor(img_2, cv2.COLOR_BGR2GRAY)
+
+    # plt.imshow(gray_1, cmap='gray', vmin=0, vmax=255)
+    # plt.title('Original')
+    # plt.show()
+
+    gray_1 = cv2.bilateralFilter(gray_1, 9, 75, 75)
+    gray_2 = cv2.bilateralFilter(gray_2, 9, 75, 75)
+
+    # plt.imshow(gray_1, cmap='gray', vmin=0, vmax=255)
+    # plt.title('Blured')
+    # plt.show()
 
     sift = cv2.SIFT_create()
 
